@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Weather</title>
+        <link rel="icon" href="static/images/cloud-sun-solid.png" type="image/png">
+        <style>
+            body {
+                background-image: url("{{item['Background']}}");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+            div {
+                background-color: rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(15px);
+                background-size: cover;
+                border-radius: 20px;
+                position: relative; 
+                margin-right:400px;
+                margin-left:400px;
+                padding: 25px;
+                }
+            h2, p {
+                font-family:Verdana, sans-serif;
+                text-align: center;
+                font-size: 20px;
+                color:black;
+            }
+            img {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="layout">
+            <p>{{ item['Location'] }}</p>
+            <p>{{ item['Description'] }}</p>
+            <img width=100px height=100px src="{{item['Icon']}}" alt="Weather visual"/>
+            <p>{{ item['Temperature'] }}</p>
+            <p>{{ item['Humidity'] }}</p>
+            <p>{{ item['Wind_speed'] }}</p>
+            <p>{{ item['Pressure'] }}</p>
+        </div> 
+    </body>
+</html>
+
