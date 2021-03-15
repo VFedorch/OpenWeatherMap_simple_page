@@ -11,3 +11,4 @@ def get_location():
     country = location_response['country']
 
     return(city, country)
+    
