@@ -9,6 +9,8 @@ def get_location():
 
     city = location_response['city']
     country = location_response['country']
+    location = location_response['loc']
+    lat, lon = location.split(',')
 
-    return(city, country)
+    return(city, country, lat, lon)
     

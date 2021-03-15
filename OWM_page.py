@@ -5,9 +5,12 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    Visitor_ip = get_visitor_ip()
-    print("\nVisitor's IP: " + Visitor_ip + "\n")
-    return render_template('index.html', item=weather())
+    # Visitor_ip = get_visitor_ip()
+    # print("\nVisitor's IP: " + Visitor_ip + "\n")
+    weather_info = weather()
+    curent_weather = weather_info[0]
+    seven_days_forecast = weather_info[1]
+    return render_template('index.html', item=curent_weather)
 
 @app.route("/", methods=["GET"])
 def get_visitor_ip():

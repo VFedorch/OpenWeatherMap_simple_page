@@ -1,27 +1,68 @@
 import json
+import time
 import requests
-from main import *
+from location import *
+
+api_key = ""
+units = "metric"
+location = get_location()
+city = location[0]
+country = location[1]
+lat = location[2]
+lon = location[3]
+response_forecast = []
+seven_days_forecast = []
+current_weather = {"Location": "Unknown", "Description": "Unknown", "Icon": "Unknown", "Background": "Unknown","Temperature": "Unknown", "Humidity": "Unknown",
+                "Wind_speed": "Unknown", "Pressure": "Unknown", "Feels_like": "Unknown", "Visibility": "Unknown", "Wind_direction": "Unknown" }
+dirs = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW']
+main_url = "http://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=" + units + "&exclude=hourly,minutely,alerts&appid=" + api_key
 
 def weather():
-    response = requests.get(weather_main_url)
+    response = requests.get(main_url)
     json_response = response.json()
-    
-    if json_response["cod"] != 200:
-        cods(json_response)
-    else:
-        Weatherinfo["Location"] = city
-        Weatherinfo["Description"] = json_response["weather"][0]["description"]
-        Visual_description = json_response["weather"][0]["icon"]
-        Weatherinfo["Icon"] = "static/images/" + Visual_description + ".png"
-        Weatherinfo["Background"] = "/static/images/" + Visual_description + "_art.jpg"
-        Weatherinfo["Temperature"] = str(round(json_response["main"]["temp"])) + "˚C"
-        Weatherinfo["Humidity"] = str(json_response["main"]["humidity"]) + "%"
-        Weatherinfo["Wind_speed"] = str(round(json_response["wind"]["speed"])) + " m/s"
-        Weatherinfo["Pressure"] = str(json_response["main"]["pressure"]) + " mb"
-        Weatherinfo["Feels_like"] = str(json_response["main"]["feels_like"]) + "˚C"
-        Visibility_km = int(json_response["visibility"]) / 1000
-        Weatherinfo["Visibility"] = str(Visibility_km) + " km"
-        ix = round(json_response["wind"]["deg"] / (360. / len(dirs)))
-        Weatherinfo["Wind_direction"] = dirs[ix % len(dirs)]
 
-    return Weatherinfo
+    if "cod" in json_response:
+        print(str(json_response["cod"]) + ": " + json_response["message"])
+    else:
+        response_current = json_response["current"]
+        response_forecast = json_response["daily"]
+
+        current_weather["Location"] = city
+        current_weather["Description"] = response_current["weather"][0]["description"]
+        Visual_description = response_current["weather"][0]["icon"]
+        current_weather["Icon"] = "static/images/" + Visual_description + ".png"
+        current_weather["Background"] = "/static/images/" + Visual_description + "_art.jpg"
+        current_weather["Temperature"] = str(round(response_current["temp"])) + "˚C"
+        current_weather["Humidity"] = str(response_current["humidity"]) + "%"
+        current_weather["Wind_speed"] = str(round(response_current["wind_speed"])) + " m/s"
+        current_weather["Pressure"] = str(response_current["pressure"]) + " mb"
+        current_weather["Feels_like"] = str(response_current["feels_like"]) + "˚C"
+        Visibility_km = int(response_current["visibility"]) / 1000
+        current_weather["Visibility"] = str(Visibility_km) + " km"
+        ix = round(response_current["wind_deg"] / (360. / len(dirs)))
+        current_weather["Wind_direction"] = dirs[ix % len(dirs)]
+
+        for item in response_forecast:
+
+            forecast = {}
+
+            epoch = item["dt"]
+            date = time.strftime("%a, %d %b", time.localtime(epoch))
+            today = time.strftime("%a, %d %b", time.localtime(time.time()))
+            
+            if date == today:
+                forecast["Date"] = "Today"
+            else:
+                forecast["Date"] = date
+
+            Visual_description = item["weather"][0]["icon"]
+            forecast["Icon"] = "static/images/" + Visual_description + ".png"
+            forecast["Description"] = item["weather"][0]["description"]
+            forecast["Temperature"] = str(round(item["temp"]["min"])) + "/" + str(round(item["temp"]["max"]))
+            forecast["Humidity"] = str(item["humidity"]) + "%"
+            forecast["Pressure"] = str(item["pressure"]) + " mb"
+            forecast["Wind_speed"] = str(round(item["wind_speed"])) + " m/s"
+            
+            seven_days_forecast.append(forecast)
+    
+    return current_weather, seven_days_forecast
