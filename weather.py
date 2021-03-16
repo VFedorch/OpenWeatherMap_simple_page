@@ -58,7 +58,7 @@ def weather():
             Visual_description = item["weather"][0]["icon"]
             forecast["Icon"] = "static/images/" + Visual_description + ".png"
             forecast["Description"] = item["weather"][0]["description"]
-            forecast["Temperature"] = str(round(item["temp"]["min"])) + "/" + str(round(item["temp"]["max"]))
+            forecast["Temperature"] = str(round(item["temp"]["min"])) + ".." + str(round(item["temp"]["max"]))
             forecast["Humidity"] = str(item["humidity"]) + "%"
             forecast["Pressure"] = str(item["pressure"]) + " mb"
             forecast["Wind_speed"] = str(round(item["wind_speed"])) + " m/s"

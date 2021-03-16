@@ -10,7 +10,7 @@ def index():
     weather_info = weather()
     curent_weather = weather_info[0]
     seven_days_forecast = weather_info[1]
-    return render_template('index.html', item=curent_weather)
+    return render_template('index.html', item=curent_weather, forecast_items=seven_days_forecast)
 
 @app.route("/", methods=["GET"])
 def get_visitor_ip():
