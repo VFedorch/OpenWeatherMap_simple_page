@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Weather</title>
+        <meta charset='UTF-8'>
+        <link rel="icon" href="static/images/cloud-sun-solid.png" type="image/png">
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            /* body {
+                
+            } */
+            form {
+                margin: auto;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="{{ url_for('weather_display') }}" method="POST">
+            <input type="text" placeholder="Your location" name="location_form">
+            <button type="submit">Search</button>
+        </form>
+    </body>
+</html>
