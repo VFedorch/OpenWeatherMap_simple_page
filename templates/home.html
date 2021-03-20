@@ -8,18 +8,71 @@
             * {
                 box-sizing: border-box;
             }
-            /* body {
-                
-            } */
+            body {
+                background-image: url('static/images/home_background.jpg');
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: cover;
+            }
+            .container {
+                display: flex;
+                background-color: rgba(0, 0, 0, 0.25);
+                backdrop-filter: blur(20px);
+                box-shadow: 1px 1px 5px;
+                background-size: cover;
+                border-radius: 20px;
+                width: 50%;
+                padding: 10px;
+                margin: auto;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+            #centered {
+                position: fixed;
+                top: 40%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
             form {
                 margin: auto;
+            }
+            form.example input {
+                padding: 10px;
+                font-size: 17px;
+                text-align: center;
+                color: white;
+                width: 100%;
+                border: none;
+                border-radius: 20px;
+                background: #00000000;
+            }
+            form.example input:hover {
+                background: rgba(255, 255, 255, 0.25);
+            }
+            form.example input:focus {
+                outline: none;
+            }
+            form.example button {
+                width: 100%;
+                padding: 10px;
+                background: #00000000;
+                color: white;
+                font-size: 17px;
+                border: none;
+                border-radius: 20px;
+                cursor: pointer;
+            }
+            form.example button:hover {
+                background: rgba(255, 255, 255, 0.25);
             }
         </style>
     </head>
     <body>
-        <form action="{{ url_for('weather_display') }}" method="POST">
-            <input type="text" placeholder="Your location" name="location_form">
-            <button type="submit">Search</button>
-        </form>
+        <div class="container" id="centered">
+            <form class="example" action="{{ url_for('weather_display') }}" method="POST">
+                <input type="text" placeholder="Print your location or press button below" name="location_form">
+                <button type="submit">Locate automatically</button>
+            </form>
+        </div>
     </body>
 </html>

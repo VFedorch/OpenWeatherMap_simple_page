@@ -72,7 +72,6 @@
                 <div>
                     <h2>{{ item['Location'] }}</h2>
                     <p>{{ item['Description'] }}</p>
-                    <p>{{ location }}</p>
                 </div>
             </div>
             <div class="row">
@@ -94,75 +93,20 @@
         </div>
         <div class="container">
             <div class="row">
-                <div>
-                    <p>{{forecast_items[1]['Date']}}</p>
-                    <img width=80px height=80px src="{{forecast_items[1]['Icon']}}" alt="Weather visual">
-                    <p>{{forecast_items[1]['Description']}}</p>
-                    <p>&#127777 {{forecast_items[1]['Temperature']}}</p>
-                    <p>&#128167 {{forecast_items[1]['Humidity']}}</p>
-                    <p>&#128207 {{forecast_items[1]['Pressure']}}</p>
-                    <p>&#128168 {{forecast_items[1]['Wind_speed']}}</p>
-                </div>
-                <div class="vl" style="height: 300px"></div>
-                <div>
-                    <p>{{forecast_items[2]['Date']}}</p>
-                    <img width=80px height=80px src="{{forecast_items[2]['Icon']}}" alt="Weather visual">
-                    <p>{{forecast_items[2]['Description']}}</p>
-                    <p>&#127777 {{forecast_items[2]['Temperature']}}</p>
-                    <p>&#128167 {{forecast_items[2]['Humidity']}}</p>
-                    <p>&#128207 {{forecast_items[2]['Pressure']}}</p>
-                    <p>&#128168 {{forecast_items[2]['Wind_speed']}}</p>
-                </div>
-                <div class="vl" style="height: 300px"></div>
-                <div>
-                    <p>{{forecast_items[3]['Date']}}</p>
-                    <img width=80px height=80px src="{{forecast_items[3]['Icon']}}" alt="Weather visual">
-                    <p>{{forecast_items[3]['Description']}}</p>
-                    <p>&#127777 {{forecast_items[3]['Temperature']}}</p>
-                    <p>&#128167 {{forecast_items[3]['Humidity']}}</p>
-                    <p>&#128207 {{forecast_items[3]['Pressure']}}</p>
-                    <p>&#128168 {{forecast_items[3]['Wind_speed']}}</p>
-                </div>
-                <div class="vl" style="height: 300px"></div>
-                <div>
-                    <p>{{forecast_items[4]['Date']}}</p>
-                    <img width=80px height=80px src="{{forecast_items[4]['Icon']}}" alt="Weather visual">
-                    <p>{{forecast_items[4]['Description']}}</p>
-                    <p>&#127777 {{forecast_items[4]['Temperature']}}</p>
-                    <p>&#128167 {{forecast_items[4]['Humidity']}}</p>
-                    <p>&#128207 {{forecast_items[4]['Pressure']}}</p>
-                    <p>&#128168 {{forecast_items[4]['Wind_speed']}}</p>
-                </div>
-                <div class="vl" style="height: 300px"></div>
-                <div>
-                    <p>{{forecast_items[5]['Date']}}</p>
-                    <img width=80px height=80px src="{{forecast_items[5]['Icon']}}" alt="Weather visual">
-                    <p>{{forecast_items[5]['Description']}}</p>
-                    <p>&#127777 {{forecast_items[5]['Temperature']}}</p>
-                    <p>&#128167 {{forecast_items[5]['Humidity']}}</p>
-                    <p>&#128207 {{forecast_items[5]['Pressure']}}</p>
-                    <p>&#128168 {{forecast_items[5]['Wind_speed']}}</p>
-                </div>
-                <div class="vl" style="height: 300px"></div>
-                <div>
-                    <p>{{forecast_items[6]['Date']}}</p>
-                    <img width=80px height=80px src="{{forecast_items[6]['Icon']}}" alt="Weather visual">
-                    <p>{{forecast_items[6]['Description']}}</p>
-                    <p>&#127777 {{forecast_items[6]['Temperature']}}</p>
-                    <p>&#128167 {{forecast_items[6]['Humidity']}}</p>
-                    <p>&#128207 {{forecast_items[6]['Pressure']}}</p>
-                    <p>&#128168 {{forecast_items[6]['Wind_speed']}}</p>
-                </div>
-                <div class="vl" style="height: 300px"></div>
-                <div>
-                    <p>{{forecast_items[7]['Date']}}</p>
-                    <img width=80px height=80px src="{{forecast_items[7]['Icon']}}" alt="Weather visual">
-                    <p>{{forecast_items[7]['Description']}}</p>
-                    <p>&#127777 {{forecast_items[7]['Temperature']}}</p>
-                    <p>&#128167 {{forecast_items[7]['Humidity']}}</p>
-                    <p>&#128207 {{forecast_items[7]['Pressure']}}</p>
-                    <p>&#128168 {{forecast_items[7]['Wind_speed']}}</p>
-                </div>
+                {% for data in forecast_items[1:8] %}
+                    {% if data != forecast_items[1] %}
+                        <div class="vl" style="height: 300px"></div>
+                    {% endif %}
+                    <div>
+                        <p>{{data['Date']}}</p>
+                        <img width=80px height=80px src="{{data['Icon']}}" alt="Weather visual">
+                        <p>{{data['Description']}}</p>
+                        <p>&#127777 {{data['Temperature']}}</p>
+                        <p>&#128167 {{data['Humidity']}}</p>
+                        <p>&#128207 {{data['Pressure']}}</p>
+                        <p>&#128168 {{data['Wind_speed']}}</p>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </body>
