@@ -33,7 +33,6 @@ form.example input {
     padding: 10px;
     font-size: 17px;
     text-align: center;
-    color: black;
     width: 100%;
     border: none;
     border-radius: 20px;
@@ -41,8 +40,10 @@ form.example input {
     margin-bottom: 10px;
 }
 form.example input:hover {
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    color: black;
+    background: rgba(255, 255, 255, 0.25);
+}
+form.example input:hover::placeholder {
+    color: white;
 }
 form.example input:focus {
     outline: none;
