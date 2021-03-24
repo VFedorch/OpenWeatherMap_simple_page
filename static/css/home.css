@@ -36,14 +36,8 @@ form.example input {
     width: 100%;
     border: none;
     border-radius: 20px;
-    background: none;
+    background: white;
     margin-bottom: 10px;
-}
-form.example input:hover {
-    background: rgba(255, 255, 255, 0.25);
-}
-form.example input:hover::placeholder {
-    color: white;
 }
 form.example input:focus {
     outline: none;

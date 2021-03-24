@@ -3,21 +3,22 @@ import time
 import requests
 from location import *
 
-api_key = ""
-units = "metric"
-location = get_location()
-city = location[0]
-country = location[1]
-lat = location[2]
-lon = location[3]
-response_forecast = []
-seven_days_forecast = []
-current_weather = {"Location": "Unknown", "Description": "Unknown", "Icon": "Unknown", "Background": "Unknown","Temperature": "Unknown", "Humidity": "Unknown",
-                "Wind_speed": "Unknown", "Pressure": "Unknown", "Feels_like": "Unknown", "Visibility": "Unknown", "Wind_direction": "Unknown" }
-dirs = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW']
-main_url = "http://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=" + units + "&exclude=hourly,minutely,alerts&appid=" + api_key
+def weather(form_or_button):
 
-def weather():
+    api_key = ""
+    units = "metric"
+    city_name = form_or_button
+    location = get_location(city_name)
+    city = location[0]
+    lat = location[1]
+    lon = location[2]
+    response_forecast = []
+    seven_days_forecast = []
+    current_weather = {"Location": "Unknown", "Description": "Unknown", "Icon": "Unknown", "Background": "Unknown","Temperature": "Unknown", "Humidity": "Unknown",
+                    "Wind_speed": "Unknown", "Pressure": "Unknown", "Feels_like": "Unknown", "Visibility": "Unknown", "Wind_direction": "Unknown" }
+    dirs = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW']
+    main_url = "http://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=" + units + "&exclude=hourly,minutely,alerts&appid=" + api_key
+
     response = requests.get(main_url)
     json_response = response.json()
 
