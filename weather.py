@@ -31,8 +31,8 @@ def weather(form_or_button):
         current_weather["Location"] = city
         current_weather["Description"] = response_current["weather"][0]["description"]
         Visual_description = response_current["weather"][0]["icon"]
-        current_weather["Icon"] = "static/images/" + Visual_description + ".png"
-        current_weather["Background"] = "/static/images/" + Visual_description + "_art.jpg"
+        current_weather["Icon"] = "static/images/icons/" + Visual_description + ".png"
+        current_weather["Background"] = "/static/images/arts/" + Visual_description + "_art.jpg"
         current_weather["Temperature"] = str(round(response_current["temp"])) + "˚C"
         current_weather["Humidity"] = str(response_current["humidity"]) + "%"
         current_weather["Wind_speed"] = str(round(response_current["wind_speed"])) + " m/s"
@@ -57,7 +57,7 @@ def weather(form_or_button):
                 forecast["Date"] = date
 
             Visual_description = item["weather"][0]["icon"]
-            forecast["Icon"] = "static/images/" + Visual_description + ".png"
+            forecast["Icon"] = "static/images/icons/" + Visual_description + ".png"
             forecast["Description"] = item["weather"][0]["description"]
             forecast["Temperature"] = str(round(item["temp"]["min"])) + ".." + str(round(item["temp"]["max"])) + "˚C"
             forecast["Humidity"] = str(item["humidity"]) + "%"
