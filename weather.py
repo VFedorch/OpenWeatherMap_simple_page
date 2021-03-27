@@ -3,12 +3,12 @@ import time
 import requests
 from location import *
 
-def weather(form_or_button):
+def weather(form_or_button, users_ip):
 
     api_key = ""
     units = "metric"
     city_name = form_or_button
-    location = get_location(city_name)
+    location = get_location(city_name, users_ip)
     city = location[0]
     lat = location[1]
     lon = location[2]

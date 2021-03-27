@@ -5,18 +5,13 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    return render_template('home.html', )
-
-@app.route("/", methods=["GET"])
-def get_visitor_ip():
-    return request.remote_addr
+    return render_template('home.html')
 
 @app.route("/weather_display", methods = ['POST', 'GET'])
 def weather_display():
-    # visitors_ip = get_visitor_ip()
-    # print(visitors_ip)
     form_or_button = request.form.get('location_form')
-    weather_info = weather(form_or_button)
+    users_ip = request.remote_addr
+    weather_info = weather(form_or_button, users_ip)
     curent_weather = weather_info[0]
     seven_days_forecast = weather_info[1]
     return render_template('weather_display.html', item=curent_weather, forecast_items=seven_days_forecast)

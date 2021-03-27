@@ -1,14 +1,13 @@
 import json
 import requests
 import geocoder
+from OWM_page import *
 
-def get_location(city_name):
-    get_location_url = 'http://ipinfo.io/json'
+def get_location(city_name, users_ip):
 
     if city_name:
         g = geocoder.osm(city_name)
         response = g.json
-
         print("\n" + str(response))
         
         splited_city_name = city_name.split(',')
@@ -19,11 +18,15 @@ def get_location(city_name):
         return(city, lat, lon)
 
     else:
-        response = requests.get(get_location_url)
-        location_response = response.json()
+        ip = str(users_ip)
+        print("\n", users_ip)
 
-        city = location_response['city']
-        location = location_response['loc']
-        lat, lon = location.split(',')
+        g = geocoder.ipinfo(ip)
+        response = g.json
+        print("\n" + str(response))
+
+        city = str(response['city'])
+        lat = str(response['lat'])
+        lon = str(response["lng"])
 
         return(city, lat, lon)
