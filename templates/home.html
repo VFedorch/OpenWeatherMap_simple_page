@@ -9,8 +9,9 @@
     <body>
         <div class="container" id="centered">
             <form class="example" action="{{ url_for('weather_display') }}" method="POST">
-                <input type="text" placeholder="Print your location or press button below" name="location_form">
-                <button type="submit">Locate automatically</button>
+                <input type="text" placeholder="City, Region, Country code" name="location_form">
+                <button type="submit">Submit</button>
+                <p>leave the field blank for automatic detection</p>
             </form>
         </div>
     </body>
