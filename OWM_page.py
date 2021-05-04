@@ -1,5 +1,11 @@
 from weather import *
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, request
+import logging, logging.config
+
+logging.config.fileConfig('logging.conf', disable_existing_loggers=False)
+
+logconsole = logging.getLogger("console")
+logfile = logging.getLogger("logfile")
 
 app = Flask(__name__)
 
@@ -14,6 +20,8 @@ def weather_display():
     weather_info = weather(form_or_button, users_ip)
     curent_weather = weather_info[0]
     seven_days_forecast = weather_info[1]
+    #logconsole.info("%s: {'Current weather': %s 'Forecast': %s}", users_ip, curent_weather, seven_days_forecast)
+    logfile.info("%s: {'Current weather': %s 'Forecast': %s}", users_ip, curent_weather, seven_days_forecast)
     return render_template('weather_display.html', item=curent_weather, forecast_items=seven_days_forecast)
 
 if __name__ == "__main__":
